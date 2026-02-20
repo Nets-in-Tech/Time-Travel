@@ -1,0 +1,679 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-blue: #1a1f3a;
+    --medium-blue: #2a3f5f;
+    --light-blue: #4a7ba7;
+    --lighter-blue: #6ba3d1;
+    --brown-orange: #8b6f47;
+    --brown-orange-light: #a6896b;
+    --white: #ffffff;
+    --star-color: #ffffff;
+    --transition-speed: 0.3s;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    background: var(--dark-blue);
+    color: var(--white);
+}
+
+.scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.scene.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Stars Background */
+.stars-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #1a1f3a 0%, #2d1f3a 50%, #1a1f3a 100%);
+    overflow: hidden;
+}
+
+.stars-background::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        radial-gradient(2px 2px at 20% 30%, var(--star-color), transparent),
+        radial-gradient(2px 2px at 60% 70%, var(--star-color), transparent),
+        radial-gradient(1px 1px at 50% 50%, var(--star-color), transparent),
+        radial-gradient(1px 1px at 80% 10%, var(--star-color), transparent),
+        radial-gradient(2px 2px at 90% 40%, var(--star-color), transparent),
+        radial-gradient(1px 1px at 33% 60%, var(--star-color), transparent),
+        radial-gradient(1px 1px at 55% 25%, var(--star-color), transparent),
+        radial-gradient(2px 2px at 15% 80%, var(--star-color), transparent);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Main Title */
+.main-title {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-align: center;
+    z-index: 10;
+}
+
+/* Telescope Container */
+.telescope-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 90%;
+    max-width: 1200px;
+    z-index: 5;
+}
+
+/* Year Selector Box */
+.year-selector-box {
+    background: var(--medium-blue);
+    border-radius: 8px;
+    padding: 1rem;
+    width: 120px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.year-item {
+    flex: 0 0 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-weight: 500;
+    color: var(--white);
+    transition: opacity 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
+    min-height: 100px;
+    width: 100%;
+}
+
+.year-item.active {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    opacity: 1;
+}
+
+.year-item:not(.active) {
+    opacity: 0.6;
+}
+
+/* Telescope */
+.telescope-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: center center;
+    transition: transform 1s ease;
+}
+
+.telescope-ground {
+    width: 200px;
+    height: 20px;
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.telescope {
+    position: relative;
+    margin-top: -10px;
+    transform-origin: center bottom;
+}
+
+.telescope-body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.telescope-segment {
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--lighter-blue) 100%);
+    border-radius: 20px;
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.2),
+                0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.segment-1 {
+    width: 80px;
+    height: 120px;
+    margin-right: -10px;
+    z-index: 3;
+}
+
+.segment-2 {
+    width: 70px;
+    height: 100px;
+    margin-right: -8px;
+    z-index: 2;
+}
+
+.segment-3 {
+    width: 60px;
+    height: 80px;
+    margin-right: -6px;
+    z-index: 1;
+}
+
+.telescope-lens {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, var(--lighter-blue) 100%);
+    border-radius: 50%;
+    border: 3px solid var(--light-blue);
+    position: relative;
+    z-index: 4;
+    box-shadow: 0 0 20px rgba(107, 163, 209, 0.5),
+                inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.telescope-stand {
+    width: 4px;
+    height: 150px;
+    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+    position: absolute;
+    bottom: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* Time Controls */
+.time-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--medium-blue);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.control-group label {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    font-weight: 500;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.time-btn {
+    width: 60px;
+    height: 60px;
+    background: var(--dark-blue);
+    border: 2px solid var(--light-blue);
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.time-btn:hover {
+    background: var(--medium-blue);
+    transform: scale(1.05);
+}
+
+.time-btn.active {
+    background: var(--light-blue);
+    border-color: var(--lighter-blue);
+    box-shadow: 0 0 15px rgba(107, 163, 209, 0.5);
+}
+
+.time-btn.pressed {
+    background: var(--lighter-blue);
+    transform: scale(0.95);
+}
+
+/* Glimpse Button */
+.glimpse-btn {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--medium-blue);
+    border: 2px solid var(--light-blue);
+    border-radius: 8px;
+    padding: 1rem 2.5rem;
+    color: var(--white);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.glimpse-btn:hover {
+    background: var(--light-blue);
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 6px 20px rgba(107, 163, 209, 0.4);
+}
+
+.glimpse-btn:active {
+    transform: translateX(-50%) scale(0.98);
+}
+
+/* Circular Scene */
+#circular-scene {
+    background: var(--dark-blue);
+}
+
+.circular-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.nav-label {
+    position: absolute;
+    top: 5%;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 500;
+    color: var(--white);
+    z-index: 10;
+}
+
+.backward-label {
+    left: 5%;
+}
+
+.forward-label {
+    right: 5%;
+}
+
+.circular-frame {
+    position: relative;
+    width: min(90vw, 600px);
+    height: min(90vw, 600px);
+    max-width: 600px;
+    max-height: 600px;
+    border: 8px solid var(--lighter-blue);
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--brown-orange);
+    box-shadow: 0 0 30px rgba(107, 163, 209, 0.5),
+                inset 0 0 50px rgba(0, 0, 0, 0.2);
+}
+
+.circular-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    background: var(--brown-orange);
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide.prev {
+    transform: translateX(-100%);
+}
+
+.slide-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--white);
+}
+
+.slide-description {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    line-height: 1.6;
+    max-width: 80%;
+}
+
+.slide-image {
+    max-width: 60%;
+    max-height: 40%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.slide-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.slide-arrow {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+    transition: all var(--transition-speed) ease;
+    backdrop-filter: blur(5px);
+}
+
+.slide-arrow:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.slide-indicators {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 5;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+.indicator.active {
+    background: var(--white);
+    transform: scale(1.3);
+}
+
+.off-glimpse-btn {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    background: var(--medium-blue);
+    border: 2px solid var(--light-blue);
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    color: var(--white);
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    z-index: 10;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.off-glimpse-btn:hover {
+    background: var(--light-blue);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(107, 163, 209, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .telescope-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .year-selector-box {
+        width: 100px;
+        height: 250px;
+        order: 1;
+    }
+    
+    .telescope-wrapper {
+        order: 2;
+    }
+    
+    .time-controls {
+        flex-direction: row;
+        order: 3;
+        padding: 1rem;
+    }
+    
+    .control-group {
+        flex-direction: column-reverse;
+    }
+    
+    .time-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .circular-frame {
+        width: min(85vw, 500px);
+        height: min(85vw, 500px);
+    }
+    
+    .slide-title {
+        font-size: 1.5rem;
+    }
+    
+    .slide-description {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 1.5rem;
+        top: 3%;
+    }
+    
+    .telescope-container {
+        gap: 1rem;
+    }
+    
+    .year-selector-box {
+        width: 80px;
+        height: 200px;
+    }
+    
+    .year-item {
+        font-size: 1rem;
+        min-height: 66px;
+    }
+    
+    .year-item.active {
+        font-size: 1.2rem;
+    }
+    
+    .telescope-segment.segment-1 {
+        width: 60px;
+        height: 90px;
+    }
+    
+    .telescope-segment.segment-2 {
+        width: 50px;
+        height: 75px;
+    }
+    
+    .telescope-segment.segment-3 {
+        width: 40px;
+        height: 60px;
+    }
+    
+    .telescope-lens {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .time-controls {
+        padding: 0.8rem;
+        gap: 0.5rem;
+    }
+    
+    .time-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .glimpse-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        bottom: 5%;
+    }
+    
+    .circular-frame {
+        width: min(90vw, 400px);
+        height: min(90vw, 400px);
+        border-width: 6px;
+    }
+    
+    .slide {
+        padding: 1.5rem;
+    }
+    
+    .slide-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .slide-description {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+    
+    .slide-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    .off-glimpse-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Zoom Animation */
+.telescope-wrapper.zooming {
+    animation: telescopeZoom 2s ease-in forwards;
+}
+
+@keyframes telescopeZoom {
+    0% {
+        transform: scale(1) translate(-50%, -50%);
+    }
+    100% {
+        transform: scale(15) translate(-50%, -50%);
+    }
+}
+
+/* Year Colors for Circular Backgrounds */
+.slide.year-1990,
+.circular-frame.year-1990 {
+    background: linear-gradient(135deg, #6b4423 0%, #8b6f47 100%);
+}
+
+.slide.year-2026,
+.circular-frame.year-2026 {
+    background: linear-gradient(135deg, #8b6f47 0%, #a6896b 100%);
+}
+
+.slide.year-2040,
+.circular-frame.year-2040 {
+    background: linear-gradient(135deg, #4a7ba7 0%, #6ba3d1 100%);
+}
+
+.circular-frame {
+    transition: background 0.5s ease;
+}

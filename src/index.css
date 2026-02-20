@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  body {
+    @apply font-sans overflow-hidden h-screen bg-dark-blue text-white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+}
+
+@layer utilities {
+  .stars-background {
+    @apply absolute top-0 left-0 w-full h-full overflow-hidden;
+    background: linear-gradient(180deg, #1a1f3a 0%, #2d1f3a 50%, #1a1f3a 100%);
+  }
+
+  .stars-background::before {
+    content: '';
+    @apply absolute w-[200%] h-[200%];
+    background-image: 
+      radial-gradient(2px 2px at 20% 30%, white, transparent),
+      radial-gradient(2px 2px at 60% 70%, white, transparent),
+      radial-gradient(1px 1px at 50% 50%, white, transparent),
+      radial-gradient(1px 1px at 80% 10%, white, transparent),
+      radial-gradient(2px 2px at 90% 40%, white, transparent),
+      radial-gradient(1px 1px at 33% 60%, white, transparent),
+      radial-gradient(1px 1px at 55% 25%, white, transparent),
+      radial-gradient(2px 2px at 15% 80%, white, transparent);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: twinkle 3s ease-in-out infinite alternate;
+  }
+}
