@@ -29,7 +29,7 @@ const yearData = {
     slides: [
       {
         title: 'Smart Assistants',
-        description: 'AI assistants help manage our daily tasks and decisions',
+        description: 'AI assistants help manage our daily tasks and decisions. (this place is to be filled more)',
         image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop'
       },
       {
@@ -147,15 +147,15 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
       
       {/* Outer Circular Border - At screen edge */}
       <div 
-        className={`absolute inset-0 border-[8px] md:border-[12px] border-lighter-blue rounded-full overflow-hidden shadow-[0_0_30px_rgba(107,163,209,0.5)] transition-all duration-500 ${getYearBackgroundClass()}`}
+        className={`absolute inset-0 overflow-hidden transition-all duration-500 bg-blue-300`}
         style={{
-          clipPath: 'circle(50% at 50% 50%)',
+          clipPath: 'circle(55% at 50% 50%)',
         }}
       />
       
       {/* Inner Content Area - Smaller radius, creating more space for content */}
       <div 
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] md:w-[65vw] md:h-[65vw] lg:w-[60vw] lg:h-[60vw] max-w-[500px] max-h-[500px] rounded-full overflow-hidden transition-all duration-500 ${getYearBackgroundClass()}`}
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] md:w-[65vw] md:h-[65vw] lg:w-[80vw] lg:h-[80vw] rounded-full overflow-hidden transition-all duration-500 ${getYearBackgroundClass()}`}
         style={{
           boxShadow: 'inset 0 0 50px rgba(0,0,0,0.2)',
         }}
@@ -165,7 +165,7 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center p-4 md:p-8 transition-all duration-500 ${
+              className={`absolute flex flex-row gap-[5rem] items-center justify-center top-0 left-0 w-full h-full p-4 md:p-8 transition-all duration-500 ${
                 index === currentSlide
                   ? 'opacity-100 translate-x-0'
                   : index < currentSlide
@@ -173,16 +173,18 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
                   : 'opacity-0 translate-x-full'
               }`}
             >
+              <div className='border-4 border-blue-500 w-[40%]'>
               <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center">
                 {slide.title}
               </h2>
               <p className="text-white text-sm md:text-base lg:text-lg text-center mb-6 max-w-[80%] leading-relaxed">
                 {slide.description}
               </p>
+              </div>
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="max-w-[60%] max-h-[40%] object-contain rounded-lg shadow-lg"
+                className="border-4 border-blue-500 max-w-[30%] max-h-[30%] object-contain rounded-lg shadow-lg"
                 onError={(e) => { e.target.style.display = 'none' }}
               />
             </div>

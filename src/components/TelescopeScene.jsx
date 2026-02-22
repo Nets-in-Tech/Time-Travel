@@ -120,7 +120,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
           }}
         >
           {/* Telescope Image with fallback */}
-          <div className="relative border-4 border-red-500 md:w-64 lg:w-80 h-[50%] bottom-[10%">
+          <div className="relative border-4 border-red-500 md:w-64 lg:w-80">
             <img
               src={telescopeImagePath}
               alt="Telescope"
