@@ -8,7 +8,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
   const [currentTime, setCurrentTime] = useState('present')
   const [pressedButton, setPressedButton] = useState(null)
   // Start with 100 to show present (2026) initially
-  const [yearScrollPosition, setYearScrollPosition] = useState(0)
+  const [yearScrollPosition, setYearScrollPosition] = useState(100)
 
   const years = [1990, 2026, 2040]
 
@@ -73,8 +73,11 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
       
       {/* Floor - Slanted div box at bottom edge to edge - z-10 */}
       <div 
-        className="absolute bottom-0 left-0 w-full h-[50%] z-10"
-        style={{
+        className={`absolute bottom-0 left-0 w-full h-[50%] z-10 transition-all duration-2000${
+                isZooming ? 'scale-[10] translate-y-[30%]' : ''
+              }`}
+              style={{
+                transformOrigin: 'center top',
           background: 'linear-gradient(to top, #1a1a1a 0%, #2a2a2a 50%, #4a4949 100%)',
           clipPath: 'polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)',
           boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.5)',
@@ -82,15 +85,15 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
       />
       
       {/* Main Title - z-30 */}
-      <h1 className="absolute top-[5%] left-1/2 -translate-x-1/2 text-white text-center z-30 text-3xl md:text-4xl lg:text-5xl font-light tracking-wider">
+      <h1 className="absolute border-4 border-yellow-500 top-[5%] left-1/2 -translate-x-1/2 text-white text-center z-30 text-3xl md:text-4xl lg:text-5xl font-light tracking-wider">
         Glimpse of the future
       </h1>
       
       {/* Main Container - z-20 (above floor, below title/button) */}
-      <div className="border-4 border-red-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 w-[90%] max-w-6xl z-20">
+      <div className="border-4 border-yellow-500 relative top-[15%] w-[90%] w-full h-[60%] max-w-6xl z-20">
         
         {/* Year Selector Box - Shows only one year at a time */}
-        <div className="relative bg-medium-blue rounded-lg p-4 w-24 md:w-32 h-[100px] md:h-[120px] overflow-hidden shadow-lg">
+        <div className="absolute bg-medium-blue top-[5rem] left-[5rem] rounded-lg p-4 w-24 md:w-32 h-[100px] md:h-[120px] overflow-hidden shadow-lg">
           <div 
             className="absolute inset-0 flex flex-col transition-transform duration-600 ease-out"
             style={{ transform: `translateY(-${yearScrollPosition}%)` }}
@@ -98,7 +101,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
             {years.map((year) => (
               <div
                 key={year}
-                className="flex-shrink-0 flex items-center justify-center text-white font-bold text-xl md:text-2xl lg:text-3xl h-[100px] md:h-[120px]"
+                className="rotate-[-90deg] flex-shrink-0 flex items-center justify-center text-white font-bold text-xl md:text-2xl lg:text-3xl h-[100px] md:h-[120px]"
               >
                 {year}
               </div>
@@ -108,24 +111,24 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
         
         {/* Telescope Wrapper */}
         <div 
-          className={`border-4 border-blue-500 relative flex flex-col bottom-[10%] ${
+          className={`absolute left-[30%] top-[-3rem] border-4 border-blue-500 ${
             isZooming ? 'animate-telescope-zoom' : ''
           }`}
           style={{
             transformOrigin: 'center center',
-            transition: isZooming ? 'none' : 'all 1s ease',
+            transition: isZooming ? 'none' : 'all 3s ease',
           }}
         >
           {/* Telescope Image with fallback */}
-          <div className="relative border-4 border-red-500 w-[5%] md:w-64 lg:w-80 h-64 md:h-80">
+          <div className="relative border-4 border-red-500 md:w-64 lg:w-80 h-[50%] bottom-[10%">
             <img
               src={telescopeImagePath}
               alt="Telescope"
-              className={`relative w-full h-full object-contain mix-blend-lighten transition-all duration-1000 ${
-                isZooming ? 'scale-[15] translate-y-[40%]' : ''
+              className={`relative w-full h-full object-contain transition-all duration-1000 ${
+                isZooming ? 'scale-[10] translate-y-[30%]' : ''
               }`}
               style={{
-                transformOrigin: 'center bottom',
+                transformOrigin: 'center top',
               }}
               onError={(e) => {
                 // Show placeholder instead of hiding
@@ -152,7 +155,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
         </div>
         
         {/* Time Controls - Horizontal Layout */}
-        <div className="flex flex-row gap-4 md:gap-6 bg-medium-blue rounded-lg p-4 md:p-6 shadow-lg">
+        <div className="absolute left-[70%] top-[5rem] flex flex-row gap-4 md:gap-6 bg-medium-blue rounded-lg p-4 md:p-6 shadow-lg">
           {/* Past Button */}
           <div className="flex flex-col items-center gap-2">
             <label className="text-white text-xs md:text-sm font-medium uppercase tracking-wider">
