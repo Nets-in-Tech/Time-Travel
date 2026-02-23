@@ -74,7 +74,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
       {/* Floor - Slanted div box at bottom edge to edge - z-10 */}
       <div 
         className={`absolute bottom-0 left-0 w-full h-[50%] z-10 transition-all duration-2000${
-                isZooming ? 'scale-[10] translate-y-[30%]' : ''
+                isZooming ? 'scale-[1.3] translate-y-[10%]' : ''
               }`}
               style={{
                 transformOrigin: 'center top',
@@ -111,21 +111,15 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
         
         {/* Telescope Wrapper */}
         <div 
-          className={`absolute left-[30%] top-[-3rem] border-4 border-blue-500 ${
-            isZooming ? 'animate-telescope-zoom' : ''
-          }`}
-          style={{
-            transformOrigin: 'center center',
-            transition: isZooming ? 'none' : 'all 3s ease',
-          }}
+          className={`absolute left-[30%] top-[-3rem] border-4 border-blue-500`}
         >
           {/* Telescope Image with fallback */}
           <div className="relative border-4 border-red-500 md:w-64 lg:w-80">
             <img
               src={telescopeImagePath}
               alt="Telescope"
-              className={`relative w-full h-full object-contain transition-all duration-1000 ${
-                isZooming ? 'scale-[10] translate-y-[30%]' : ''
+              className={`relative w-full h-full object-contain transition-all duration-1000 ease-linear ${
+                isZooming ? 'scale-[1.3] translate-y-[5%]' : ''
               }`}
               style={{
                 transformOrigin: 'center top',
