@@ -163,6 +163,7 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
       >
         {/* Slides Container */}
         <div className="relative w-full h-full overflow-hidden">
+          <h1 className='absolute text-2xl top-[10%] md:top-[30%] left-[50%]'>{currentYear}</h1>
           {slides.map((slide, index) => (
             <div
               key={index}
