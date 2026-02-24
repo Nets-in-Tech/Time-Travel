@@ -138,10 +138,10 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
   return (
     <div className="relative w-full h-full bg-dark-blue flex items-center justify-center p-4 md:p-8">
       {/* Navigation Labels */}
-      <div className="absolute top-[5%] left-[5%] text-white text-base md:text-xl lg:text-2xl font-medium z-10 cursor-pointer hover:text-light-blue transition-colors" onClick={handleBackward}>
+      <div className="absolute top-[5%] left-[3%] text-white text-base md:text-xl lg:text-2xl font-medium z-10 cursor-pointer hover:text-light-blue transition-colors" onClick={handleBackward}>
         Backward
       </div>
-      <div className="absolute top-[5%] right-[5%] text-white text-base md:text-xl lg:text-2xl font-medium z-10 cursor-pointer hover:text-light-blue transition-colors" onClick={handleForward}>
+      <div className="absolute top-[5%] right-[3%] text-white text-base md:text-xl lg:text-2xl font-medium z-10 cursor-pointer hover:text-light-blue transition-colors" onClick={handleForward}>
         Forward
       </div>
       
@@ -208,7 +208,7 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
         </div>
         
         {/* Slide Indicators */}
-        <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 flex gap-2 z-5">
+        <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 flex gap-2 z-5">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -226,7 +226,7 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
       {/* Off Glimpse Button */}
       <button
         onClick={onOffGlimpse}
-        className="absolute bottom-[5%] right-[5%] bg-medium-blue border-2 border-light-blue rounded-lg px-4 md:px-6 py-2 md:py-3 text-white text-xs md:text-sm font-semibold uppercase tracking-wider cursor-pointer transition-all duration-300 z-10 shadow-lg hover:bg-light-blue hover:scale-105 hover:shadow-[0_6px_20px_rgba(107,163,209,0.4)] [writing-mode:vertical-rl]"
+        className="absolute bottom-[5%] right-[3%] bg-medium-blue border-2 border-light-blue rounded-lg px-4 md:px-6 py-2 md:py-3 text-white text-xs md:text-sm font-semibold uppercase tracking-wider cursor-pointer transition-all duration-300 z-10 shadow-lg hover:bg-light-blue hover:scale-105 hover:shadow-[0_6px_20px_rgba(107,163,209,0.4)] [writing-mode:vertical-rl]"
       >
         off the glimpse
       </button>

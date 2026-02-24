@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react'
 
 // Import telescope image - Make sure to add telescope.jpg to src/assets/
-// Using a path that Vite can resolve, with fallback handling
-const telescopeImagePath = '/src/assets/telescope.png'
+// Using a path that Vite can resolve
+const telescopeImage1 = '/src/assets/telescope.png'
+const telescopeImage2 = '/src/assets/telescope1.png'
 
-const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) => {
+const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming, glimpse }) => {
   const [currentTime, setCurrentTime] = useState('present')
   const [pressedButton, setPressedButton] = useState(null)
   // Start with 100 to show present (2026) initially
   const [yearScrollPosition, setYearScrollPosition] = useState(100)
+  const [image, setimage]=useState(telescopeImage1)
 
   const years = [1990, 2026, 2040]
 
@@ -66,18 +68,23 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [isZooming])
 
+   const handleclick=()=>{
+      setimage(telescopeImage2)
+      onGlimpse()
+   }
+
   return (
     <div className="relative w-full h-full overflow-hidden bg-dark-blue">
       {/* Stars Background - z-0 (lowest layer) */}
       <div className="stars-background z-0"></div>
       
       {/* Floor - Slanted div box at bottom edge to edge - z-10 */}
-      <div 
-        className={`absolute bottom-0 left-0 w-full h-[50%] z-10 transition-all duration-2000${
-                isZooming ? 'scale-[1.3] translate-y-[10%]' : ''
-              }`}
-              style={{
-                transformOrigin: 'center top',
+      <div
+        className={`absolute bottom-0 left-0 w-full h-[50%] z-10 will-change-transform transition-transform duration-[2000ms] ease-out ${
+          isZooming ? 'translate-y-[25%] scale-[2.2]' : ''
+        }`}
+        style={{
+          transformOrigin: 'center top',
           background: 'linear-gradient(to top, #1a1a1a 0%, #2a2a2a 50%, #4a4949 100%)',
           clipPath: 'polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)',
           boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.5)',
@@ -85,12 +92,12 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
       />
       
       {/* Main Title - z-30 */}
-      <h1 className="absolute border-4 border-yellow-500 top-[5%] left-1/2 -translate-x-1/2 text-white text-center z-30 text-3xl md:text-4xl lg:text-5xl font-light tracking-wider">
+      <h1 className="absolute top-[5%] left-1/2 -translate-x-1/2 text-white text-center z-30 text-3xl md:text-4xl lg:text-5xl font-light tracking-wider">
         Glimpse of the future
       </h1>
       
       {/* Main Container - z-20 (above floor, below title/button) */}
-      <div className="border-4 border-yellow-500 relative top-[15%] w-[90%] w-full h-[60%] max-w-6xl z-20">
+      <div className="relative top-[15%] w-full h-[60%] max-w-6xl z-20">
         
         {/* Year Selector Box - Shows only one year at a time */}
         <div className="absolute bg-medium-blue top-[5rem] left-[5rem] rounded-lg p-4 w-24 md:w-32 h-[100px] md:h-[120px] overflow-hidden shadow-lg">
@@ -110,17 +117,16 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
         </div>
         
         {/* Telescope Wrapper */}
-        <div 
-          className={`absolute left-[30%] top-[-3rem] border-4 border-blue-500`}
+        <div
+          className="absolute left-[30%] top-[-3rem]"
         >
           {/* Telescope Image with fallback */}
-          <div className="relative border-4 border-red-500 md:w-64 lg:w-80">
+          {image===telescopeImage1 ? 
+          <div className="relative md:w-64 lg:w-80">
             <img
-              src={telescopeImagePath}
+              src={telescopeImage1}
               alt="Telescope"
-              className={`relative w-full h-full object-contain transition-all duration-1000 ease-linear ${
-                isZooming ? 'scale-[1.3] translate-y-[5%]' : ''
-              }`}
+              className="relative w-full h-full object-contain will-change-transform transition-transform duration-[2000ms] ease-out"
               style={{
                 transformOrigin: 'center top',
               }}
@@ -146,6 +152,27 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
               </div>
             </div>
           </div>
+          :
+          <div className="perspective-[1000px] relative md:w-64 lg:w-80">
+          <img 
+              src={telescopeImage2}
+              alt="Telescope"
+              className="relative w-full h-full object-contain [transform:translateY(-300%)_rotateX(30deg)_rotate(-5deg)_scale(6)] will-change-transform transition-transform duration-[2000ms] ease-out z-50"
+              style={{
+                transformOrigin: 'center top',
+              }}
+              onError={(e) => {
+                // Show placeholder instead of hiding
+                e.target.style.display = 'none'
+                const placeholder = e.target.nextElementSibling
+                if (placeholder) {
+                  placeholder.style.display = 'flex'
+                }
+                console.warn('Telescope image not found. Please add telescope.jpg to src/assets/')
+              }}
+            /> 
+            </div>
+        }
         </div>
         
         {/* Time Controls - Horizontal Layout */}
@@ -211,9 +238,9 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming }) =
       
       {/* Glimpse Button - z-30 (same as title) */}
       <button
-        onClick={onGlimpse}
+        onClick={handleclick}
         disabled={isZooming}
-        className="absolute bottom-[10%] left-3/4 -translate-x-1/2 bg-medium-blue border-2 border-light-blue rounded-lg px-6 md:px-10 py-3 md:py-4 text-white text-sm md:text-base lg:text-lg font-semibold uppercase tracking-wider cursor-pointer transition-all duration-300 z-30 shadow-lg hover:bg-light-blue hover:scale-105 hover:shadow-[0_6px_20px_rgba(107,163,209,0.4)] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="absolute bottom-[10%] left-3/4 -translate-x-1/2 bg-medium-blue border-2 border-light-blue rounded-lg px-6 md:px-10 py-3 md:py-4 text-white text-sm md:text-base lg:text-lg font-semibold uppercase tracking-wider cursor-pointer transition-transform transition-colors duration-300 z-30 shadow-lg hover:bg-light-blue hover:scale-105 hover:shadow-[0_6px_20px_rgba(107,163,209,0.4)] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Take a glimpse
       </button>

@@ -37,4 +37,11 @@
     background-size: 200px 200px;
     animation: twinkle 3s ease-in-out infinite alternate;
   }
+
+  .rotate-x-40 {
+    transform: rotateX(40deg);
+  }
+  .rotate-y-90 {
+    transform: rotateY(90deg);
+  }
 }
