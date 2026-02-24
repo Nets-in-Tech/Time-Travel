@@ -93,7 +93,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming, gli
       
       {/* Main Title - z-30 */}
       <h1 className="absolute top-[5%] left-1/2 -translate-x-1/2 text-white text-center z-30 text-3xl md:text-4xl lg:text-5xl font-light tracking-wider">
-        Glimpse of the future
+        Tech Time Travel
       </h1>
       
       {/* Main Container - z-20 (above floor, below title/button) */}
