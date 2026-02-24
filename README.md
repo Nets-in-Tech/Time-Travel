@@ -22,38 +22,19 @@ An interactive web experience built with React.js and Tailwind CSS that allows u
 npm install
 ```
 
-2. Add your telescope image to `src/assets/`:
-   - `telescope.png` - The telescope image you provided
-   
-   Note: The floor is now a CSS div element (no image needed)
-
-3. Start the development server:
+2. Start the development server:
 ```bash
 npm run dev
-```
-
-4. Build for production:
-```bash
-npm run build
 ```
 
 ### Usage
 
 1. Select a time period using the Past (←), Present (↑), or Future (→) buttons
 2. Watch the year selector scroll to show the selected year
-3. Click "Take a glimpse" to zoom into the telescope view (telescope scales up and moves downward)
+3. Click "Take a glimpse" 
 4. Navigate through slides using arrow buttons or indicators
 5. Use Forward/Backward labels to explore different years (changes background color)
 6. Click "off the glimpse" to return to the telescope scene
-
-### Keyboard Shortcuts
-
-- **1**: Select Past
-- **2**: Select Present  
-- **3**: Select Future
-- **Enter/Space**: Take a glimpse
-- **Arrow Left/Right**: Navigate slides (in circular view)
-- **Escape**: Return to telescope scene
 
 ### Technologies
 
