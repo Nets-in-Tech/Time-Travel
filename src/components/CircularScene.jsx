@@ -1,76 +1,77 @@
 import { useState, useEffect } from 'react'
+import DNA from '../assets/dna.jpg';
+import Robot from '../assets/robot.jpg';
+import Solar from '../assets/solar.jpg';
+import Space from '../assets/space.jpg';
+import Nano from '../assets/nano.webp';
+import Mind from '../assets/mind.webp';
+import Spark from '../assets/spark.png';
+import Industry from '../assets/industry.png';
+import Film from '../assets/film.jpg';
+import Phone from '../assets/phone.webp';
+
 
 const yearData = {
-  1990: {
+  "19th C.": {
     slides: [
       {
-        title: 'Industrial Revolution',
-        description: 'Early automation systems begin transforming manufacturing',
-        image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop'
+        title: '1831 – Spark of Wonder',
+        description: 'Michael Faraday’s electric demonstrations revealed invisible forces through sparks and glowing wires. Electricity felt magical, unseen yet powerful, captivating audiences and laying the foundation for the electrical age.',
+        image: Spark
       },
       {
-        title: 'Computer Networks',
-        description: 'The foundation of modern connectivity is established',
-        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop'
+        title: '1851 – Palace of Progress',
+        description: 'The Great Exhibition inside the Crystal Palace dazzled visitors with steam engines, telegraphs, and industrial marvels. It was a breathtaking showcase of human ingenuity, turning technology into spectacle and proof of unstoppable progress.',
+        image: Industry
       },
       {
-        title: 'Personal Computing',
-        description: 'Computers become accessible to everyday users',
-        image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop'
+        title: '1876 – Voice Across the Void',
+        description: 'Alexander Graham Bell’s telephone astonished crowds as voices traveled through wires. Communication across distance seemed miraculous, a new wonder that transformed human connection and felt like sorcery made real.',
+        image: Phone
       },
       {
-        title: 'Digital Communication',
-        description: 'New ways of connecting people across distances emerge',
-        image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop'
+        title: '1895 – Shadows That Moved',
+        description: 'The Lumière brothers’ first film screening mesmerized audiences with moving pictures projected on a screen. Life replayed visually was unprecedented, a new marvel that redefined entertainment and felt like capturing reality itself.',
+        image: Film
       }
     ]
   },
-  2026: {
+  "21th C.": {
     slides: [
       {
-        title: 'Smart Assistants',
-        description: 'AI assistants help manage our daily tasks and decisions. (this place is to be filled more)',
-        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop'
+        title: 'CRISPR Gene Editing (2012 onward)',
+        description: 'Scientists developed CRISPR, a tool that can edit DNA with precision. It’s new, astonishing, and seen as rewriting life’s code—opening possibilities to cure genetic diseases, engineer crops, and even alter evolution itself.',
+        image:DNA
       },
       {
-        title: 'Autonomous Systems',
-        description: 'Self-driving vehicles and automated services become common',
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'
+        title: 'Night-Vision Solar Panels (2026)',
+        description: 'New solar tech in 2026 captures infrared radiation, allowing panels to generate electricity even after sunset. It’s a surreal leap—energy from darkness, reshaping how we think about sustainability and power independence.',
+        image: Solar
       },
       {
-        title: 'Virtual Reality',
-        description: 'Immersive experiences blur the line between digital and physical',
-        image: 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=400&h=300&fit=crop'
+        title: 'China’s AI Surgical Robots (2025–2026)',
+        description: 'Hospitals across China now use AI-powered surgical robots for complex procedures like breast surgery, joint replacements, and even revision hip and knee operations. These robots perform with millimeter-level precision, while human surgeons supervise. It’s not assistance—it’s delegation',
+        image: Robot
       },
-      {
-        title: 'Quantum Computing',
-        description: 'Breakthrough computing power opens new possibilities',
-        image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=300&fit=crop'
-      }
     ]
   },
-  2040: {
+  "22th C.": {
     slides: [
       {
-        title: 'Neural Interfaces',
-        description: 'Direct brain-computer interfaces enable new forms of interaction',
-        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop'
+        title: 'Molecular Nanotechnology',
+        description: 'Future nanobots could operate inside the human body at the cellular level. They would repair tissues, destroy cancer cells, and even reverse aging processes. This technology would make medicine microscopic, turning treatment into precision engineering at the scale of atoms.',
+        image: Nano
       },
       {
-        title: 'Space Exploration',
-        description: 'Humanity expands beyond Earth with advanced space technology',
-        image: 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400&h=300&fit=crop'
+        title: 'Space-Based Solar Power',
+        description: 'Massive solar arrays in orbit could beam energy back to Earth using microwaves or lasers. Unlike ground panels, they would collect sunlight 24/7, providing continuous clean power and potentially replacing terrestrial energy grids entirely.',
+        image: Space
       },
       {
-        title: 'Sustainable Tech',
-        description: 'Clean energy and eco-friendly solutions dominate',
-        image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=400&h=300&fit=crop'
+        title: 'Mind–Machine Integration',
+        description: 'Brain–computer interfaces may evolve into seamless systems where thoughts directly control technology. People could share memories, communicate without speech, or extend consciousness into digital realms, blurring the line between biology and machine.',
+        image: Mind
       },
-      {
-        title: 'Global Connectivity',
-        description: 'Instant communication connects every corner of the world',
-        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop'
-      }
     ]
   }
 }
@@ -79,7 +80,7 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const slides = yearData[currentYear]?.slides || []
 
-  const years = [1990, 2026, 2040]
+  const years = ["19th C.", "21th C.", "22th C."]
   const currentYearIndex = years.indexOf(currentYear)
 
   const handleForward = () => {
@@ -129,9 +130,9 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
   }, [currentSlide, slides.length])
 
   const getYearBackgroundClass = () => {
-    if (currentYear === 1990) return 'bg-gradient-to-br from-[#6b4423] to-[#8b6f47]'
-    if (currentYear === 2026) return 'bg-gradient-to-br from-[#8b6f47] to-[#a6896b]'
-    if (currentYear === 2040) return 'bg-gradient-to-br from-[#4a7ba7] to-[#6ba3d1]'
+    if (currentYear === "19th C.") return 'bg-gradient-to-br from-[#6b4423] to-[#8b6f47]'
+    if (currentYear === "21th C.") return 'bg-gradient-to-br from-[#8b6f47] to-[#a6896b]'
+    if (currentYear === "22th C.") return 'bg-gradient-to-br from-[#4a7ba7] to-[#6ba3d1]'
     return 'bg-brown-orange'
   }
 
@@ -155,7 +156,7 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
       
       {/* Inner Content Area - Smaller radius, creating more space for content */}
       <div 
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] md:w-[65vw] md:h-[65vw] lg:w-[80vw] lg:h-[80vw] rounded-full overflow-hidden transition-all duration-500 ${getYearBackgroundClass()}`}
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[75vh] w-[75vh] lg:w-[80vw] lg:h-[80vw] rounded-full overflow-hidden transition-all duration-500 ${getYearBackgroundClass()}`}
         style={{
           boxShadow: 'inset 0 0 50px rgba(0,0,0,0.2)',
         }}
@@ -165,7 +166,7 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`absolute flex flex-row gap-[5rem] items-center justify-center top-0 left-0 w-full h-full p-4 md:p-8 transition-all duration-500 ${
+              className={`absolute flex flex-col md:flex-row gap-[5rem] items-center justify-center top-0 left-0 w-full h-full p-4 md:p-8 transition-all duration-500 ${
                 index === currentSlide
                   ? 'opacity-100 translate-x-0'
                   : index < currentSlide
@@ -173,11 +174,11 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
                   : 'opacity-0 translate-x-full'
               }`}
             >
-              <div className='border-4 border-blue-500 w-[40%]'>
+              <div className='w-[40%]'>
               <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center">
                 {slide.title}
               </h2>
-              <p className="text-white text-sm md:text-base lg:text-lg text-center mb-6 max-w-[80%] leading-relaxed">
+              <p className="text-white text-sm md:text-base lg:text-lg mb-4 leading-relaxed">
                 {slide.description}
               </p>
               </div>
@@ -208,7 +209,7 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
         </div>
         
         {/* Slide Indicators */}
-        <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 flex gap-2 z-5">
+        <div className="absolute bottom-[10%] md:bottom-[20%] left-1/2 -translate-x-1/2 flex gap-2 z-5">
           {slides.map((_, index) => (
             <button
               key={index}

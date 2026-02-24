@@ -12,7 +12,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming, gli
   const [yearScrollPosition, setYearScrollPosition] = useState(100)
   const [image, setimage]=useState(telescopeImage1)
 
-  const years = [1990, 2026, 2040]
+  const years = ["19th C.", "21th C.", "22th C."]
 
   useEffect(() => {
     // Update scroll position based on current time
@@ -22,13 +22,13 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming, gli
     // translateY(-200%) = shows third year (2040)
     if (currentTime === 'past') {
       setYearScrollPosition(0) // Show 1990 at top
-      setCurrentYear(1990)
+      setCurrentYear("19th C.")
     } else if (currentTime === 'present') {
       setYearScrollPosition(100) // Show 2026 (middle year, scroll down 100%)
-      setCurrentYear(2026)
+      setCurrentYear("21th C.")
     } else if (currentTime === 'future') {
       setYearScrollPosition(200) // Show 2040 (scroll down 200% to show last year)
-      setCurrentYear(2040)
+      setCurrentYear("22th C.")
     }
   }, [currentTime, setCurrentYear])
 
@@ -100,7 +100,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming, gli
       <div className="relative top-[15%] w-full h-[60%] max-w-6xl z-20">
         
         {/* Year Selector Box - Shows only one year at a time */}
-        <div className="absolute bg-medium-blue top-[5rem] left-[5rem] rounded-lg p-4 w-24 md:w-32 h-[100px] md:h-[120px] overflow-hidden shadow-lg">
+        <div className="absolute bg-medium-blue top-[5rem] left-[0.5rem] md:left-[5rem] rounded-lg p-4 w-20 md:w-32 h-[100px] md:h-[120px] overflow-hidden shadow-lg">
           <div 
             className="absolute inset-0 flex flex-col transition-transform duration-600 ease-out"
             style={{ transform: `translateY(-${yearScrollPosition}%)` }}
@@ -118,7 +118,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming, gli
         
         {/* Telescope Wrapper */}
         <div
-          className="absolute left-[30%] top-[-3rem]"
+          className="absolute left-[10%] md:left-[30%] md:top-[-3rem] "
         >
           {/* Telescope Image with fallback */}
           {image===telescopeImage1 ? 
@@ -157,7 +157,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming, gli
           <img 
               src={telescopeImage2}
               alt="Telescope"
-              className="relative w-full h-full object-contain [transform:translateY(-300%)_rotateX(30deg)_rotate(-5deg)_scale(6)] will-change-transform transition-transform duration-[2000ms] ease-out z-50"
+              className="relative w-full h-full object-contain [transform:translateY(-300%)_rotateX(30deg)_rotate(0.5deg)_scale(6)] will-change-transform transition-transform duration-[2000ms] ease-out z-50"
               style={{
                 transformOrigin: 'center top',
               }}
@@ -176,7 +176,7 @@ const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming, gli
         </div>
         
         {/* Time Controls - Horizontal Layout */}
-        <div className="absolute left-[70%] top-[5rem] flex flex-row gap-4 md:gap-6 bg-medium-blue rounded-lg p-4 md:p-6 shadow-lg">
+        <div className="absolute left-[70%] top-[5rem] flex flex-col gap-4 md:gap-6 md:flex-row bg-medium-blue rounded-lg p-4 md:p-6 shadow-lg">
           {/* Past Button */}
           <div className="flex flex-col items-center gap-2">
             <label className="text-white text-xs md:text-sm font-medium uppercase tracking-wider">
