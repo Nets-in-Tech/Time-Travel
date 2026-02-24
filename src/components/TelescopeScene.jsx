@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 
 // Import telescope image - Make sure to add telescope.jpg to src/assets/
 // Using a path that Vite can resolve
-const telescopeImage1 = '/src/assets/telescope.png'
-const telescopeImage2 = '/src/assets/telescope1.png'
+import telescopeImage1 from '/src/assets/telescope.png'
+import telescopeImage2 from '/src/assets/telescope1.png'
 
 const TelescopeScene = ({ currentYear, setCurrentYear, onGlimpse, isZooming, glimpse }) => {
   const [currentTime, setCurrentTime] = useState('present')

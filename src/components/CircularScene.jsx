@@ -137,7 +137,7 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
   }
 
   return (
-    <div className="relative w-full h-full bg-dark-blue flex items-center justify-center p-4 md:p-8">
+    <div className="relative w-full h-full bg-dark-blue flex items-center justify-center p-4 md:p-8 overflow-hidden">
       {/* Navigation Labels */}
       <div className="absolute top-[5%] left-[3%] text-white text-base md:text-xl lg:text-2xl font-medium z-10 cursor-pointer hover:text-light-blue transition-colors" onClick={handleBackward}>
         Backward
@@ -163,11 +163,10 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
       >
         {/* Slides Container */}
         <div className="relative w-full h-full overflow-hidden">
-          <h1 className='absolute text-2xl top-[10%] md:top-[30%] left-[50%]'>{currentYear}</h1>
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`absolute flex flex-col md:flex-row gap-[5rem] items-center justify-center top-0 left-0 w-full h-full p-4 md:p-8 transition-all duration-500 ${
+              className={`absolute flex flex-col md:flex-row gap-[0.7rem] md:gap-[3rem] items-center justify-center top-0 left-0 w-full h-full p-4 md:p-8 transition-all duration-500 ${
                 index === currentSlide
                   ? 'opacity-100 translate-x-0'
                   : index < currentSlide
