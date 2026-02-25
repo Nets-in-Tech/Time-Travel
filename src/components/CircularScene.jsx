@@ -193,7 +193,7 @@ const CircularScene = ({ currentYear, setCurrentYear, onOffGlimpse }) => {
         </div>
         
         {/* Slide Navigation Arrows */}
-        <div className="absolute border-4 border-blue-500 top-1/2 -translate-y-1/2 w-full flex justify-between px-24 md:px-4 pointer-events-none z-5">
+        <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between px-24 md:px-4 pointer-events-none z-5">
           <button
             onClick={() => navigateSlide(-1)}
             className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/20 border-2 border-white/50 text-white text-2xl md:text-3xl flex items-center justify-center pointer-events-auto backdrop-blur-sm transition-all duration-300 hover:bg-white/30 hover:scale-110"
